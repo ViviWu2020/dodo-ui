@@ -2,16 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
 import { createWebHashHistory, createRouter } from 'vue-router'
-import Dodo from './components/Dodo.vue'
-import Dodo2 from './components/Dodo2.vue'
+import Home from './views/Home.vue'
+import Doc from './views/Doc.vue'
 
 
 const history = createWebHashHistory()
 const router = createRouter({
     history: history,
     routes: [
-        { path: '/', component: Dodo },
-        { path: '/xxx', component: Dodo2 },
+        { path: '/', component: Home },
+        { path: '/doc', component: Doc },
     ]
 
 })
