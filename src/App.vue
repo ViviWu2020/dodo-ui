@@ -1,15 +1,14 @@
 <template>
-  <div>hi</div>
-  <dodo />
+  <div>
+    导航栏 <router-link to="/">| Dodo</router-link>|
+    <router-link to="/xxx">| Dodo2</router-link>
+  </div>
+  <hr />
+  <router-view />
 </template>
 
 <script>
-import Dodo from "./components/Dodo.vue";
-
 export default {
   name: "App",
-  components: {
-    Dodo,
-  },
 };
 </script>
