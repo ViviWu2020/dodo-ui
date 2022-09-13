@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="topnar">
-      <div class="logo"></div>
-      <div class="menu"></div>
-    </div>
+    <Topnav />
     <div class="banner">
       <h1>Dodo-UI</h1>
       <h2>UI 框架</h2>
@@ -15,7 +12,13 @@
   </div>
 </template>
 
+<script lang="ts">
+import Topnav from "../components/Topnav.vue";
+export default {
+  components: { Topnav },
+};
+</script>
+
+
 <style lang="scss" scoped>
-.topnar {
-}
 </style>
