@@ -3,8 +3,3 @@ declare module '*.vue' {
   const componentOptions: ComponentOptions
   export default componentOptions
 }
-declare module '*.svg'
-{
-  const content: string;
-  export default content;
-}
