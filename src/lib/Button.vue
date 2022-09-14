@@ -1,5 +1,5 @@
 <template>
-  <button class="dodo-button" :class="classes">
+  <button class="dodo-button" :class="classes" :disabled="disabled">
     <slot />
   </button>
 </template>
@@ -19,6 +19,10 @@ export default {
     level: {
       type: String,
       default: "normal",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {
@@ -156,6 +160,20 @@ $radius: 4px;
         background: darken($color: red, $amount: 10%);
         border-color: darken($color: red, $amount: 10%);
       }
+    }
+    &[disabled] {
+      cursor: not-allowed;
+      color: grey;
+      &:hover {
+        border-color: grey;
+      }
+    }
+  }
+  &.dodo-theme-link,
+  &.dodo-theme-text {
+    &[disabled] {
+      cursor: not-allowed;
+      color: grey;
     }
   }
 }
