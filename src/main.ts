@@ -1,7 +1,9 @@
-import { router } from './router';
-import { createApp } from 'vue'
-import App from './App.vue'
+import "./lib/dodo.scss"
 import './index.scss'
+import { createApp } from 'vue'
+import { router } from './router';
+import App from './App.vue'
+
 
 
 const app = createApp(App)
