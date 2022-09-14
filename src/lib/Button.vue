@@ -16,13 +16,18 @@ export default {
       type: String,
       default: "normal",
     },
+    level: {
+      type: String,
+      default: "normal",
+    },
   },
   setup(props) {
-    const { theme, size } = props;
+    const { theme, size, level } = props;
     const classes = computed(() => {
       return {
         [`dodo-theme-${theme}`]: theme,
         [`dodo-size-${size}`]: size,
+        [`dodo-level-${level}`]: level,
       };
     });
     return { classes };
@@ -70,6 +75,23 @@ $radius: 4px;
     &:focus {
       color: lighten($blue, 10%);
     }
+    &.dodo-size-big {
+      font-size: 24px;
+      height: 44px;
+      padding: 0 16px;
+    }
+    &.dodo-size-small {
+      font-size: 12px;
+      height: 20px;
+      padding: 0 4px;
+    }
+    &.dodo-level-danger {
+      color: red;
+      &:hover,
+      &:focus {
+        color: darken($color: red, $amount: 10%);
+      }
+    }
   }
   &.dodo-theme-text {
     border-color: transparent;
@@ -79,35 +101,61 @@ $radius: 4px;
     &:focus {
       background: darken(white, 5%);
     }
+    &.dodo-size-big {
+      font-size: 24px;
+      height: 44px;
+      padding: 0 16px;
+    }
+    &.dodo-size-small {
+      font-size: 12px;
+      height: 20px;
+      padding: 0 4px;
+    }
+    &.dodo-level-main {
+      color: $blue;
+      &:hover,
+      &:focus {
+        color: darken($color: $blue, $amount: 10%);
+      }
+    }
+    &.dodo-level-danger {
+      color: red;
+      &:hover,
+      &:focus {
+        color: darken($color: red, $amount: 10%);
+      }
+    }
   }
   &.dodo-theme-button {
     &.dodo-size-big {
       font-size: 24px;
       height: 44px;
+      padding: 0 16px;
     }
     &.dodo-size-small {
-      font-size: 8px;
+      font-size: 12px;
       height: 20px;
+      padding: 0 4px;
     }
-  }
-  &.dodo-theme-link {
-    &.dodo-size-big {
-      font-size: 24px;
-      height: 44px;
+    &.dodo-level-main {
+      background: $blue;
+      color: white;
+      border-color: $blue;
+      &:hover,
+      &:focus {
+        background: darken($color: $blue, $amount: 10%);
+        border-color: darken($color: $blue, $amount: 10%);
+      }
     }
-    &.dodo-size-small {
-      font-size: 8px;
-      height: 20px;
-    }
-  }
-  &.dodo-theme-text {
-    &.dodo-size-big {
-      font-size: 24px;
-      height: 44px;
-    }
-    &.dodo-size-small {
-      font-size: 8px;
-      height: 20px;
+    &.dodo-level-danger {
+      background: red;
+      color: white;
+      border-color: red;
+      &:hover,
+      &:focus {
+        background: darken($color: red, $amount: 10%);
+        border-color: darken($color: red, $amount: 10%);
+      }
     }
   }
 }
