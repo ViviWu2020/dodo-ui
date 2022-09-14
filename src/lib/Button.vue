@@ -1,13 +1,31 @@
 <template>
-  <button class="dodo-button" :class="`dodo-theme-${theme}`">
+  <button class="dodo-button" :class="classes">
     <slot />
   </button>
 </template>
 
 <script lang="ts">
+import { computed } from "vue";
 export default {
   props: {
-    theme: String,
+    theme: {
+      type: String,
+      default: "button",
+    },
+    size: {
+      type: String,
+      default: "normal",
+    },
+  },
+  setup(props) {
+    const { theme, size } = props;
+    const classes = computed(() => {
+      return {
+        [`dodo-theme-${theme}`]: theme,
+        [`dodo-size-${size}`]: size,
+      };
+    });
+    return { classes };
   },
 };
 </script>
@@ -60,6 +78,36 @@ $radius: 4px;
     &:hover,
     &:focus {
       background: darken(white, 5%);
+    }
+  }
+  &.dodo-theme-button {
+    &.dodo-size-big {
+      font-size: 24px;
+      height: 44px;
+    }
+    &.dodo-size-small {
+      font-size: 8px;
+      height: 20px;
+    }
+  }
+  &.dodo-theme-link {
+    &.dodo-size-big {
+      font-size: 24px;
+      height: 44px;
+    }
+    &.dodo-size-small {
+      font-size: 8px;
+      height: 20px;
+    }
+  }
+  &.dodo-theme-text {
+    &.dodo-size-big {
+      font-size: 24px;
+      height: 44px;
+    }
+    &.dodo-size-small {
+      font-size: 8px;
+      height: 20px;
     }
   }
 }
