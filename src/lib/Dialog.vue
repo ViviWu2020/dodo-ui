@@ -4,12 +4,11 @@
     <div class="dodo-dialog-wrapper">
       <div class="dodo-dialog">
         <header>
-          标题
+          <slot name="title" />
           <span @click="close" class="dodo-dialog-close"></span>
         </header>
         <main>
-          <p>第一行</p>
-          <p>第二行</p>
+          <slot name="content" />
         </main>
         <footer>
           <Button @click="submitOk" level="main">OK</Button>
@@ -35,6 +34,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    title: {
+      type: String,
+      default: "提示",
+    },
     ok: {
       type: Function,
     },
@@ -57,9 +60,8 @@ export default {
       }
     };
     const submitCancel = () => {
-      if (props.cancel?.()) {
-        close();
-      }
+      context.emit("cancel");
+      close();
     };
     return { close, onClickOverlay, submitCancel, submitOk };
   },
