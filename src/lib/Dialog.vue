@@ -1,18 +1,23 @@
 <template>
-  <div class="dodo-dialog-overlay"></div>
-  <div class="dodo-dialog-wrapper">
-    <div class="dodo-dialog">
-      <header>标题<span class="dodo-dialog-close"></span></header>
-      <main>
-        <p>第一行</p>
-        <p>第二行</p>
-      </main>
-      <footer>
-        <Button level="main">OK</Button>
-        <Button>Cancel</Button>
-      </footer>
+  <template v-if="visible">
+    <div @click="onClickOverlay" class="dodo-dialog-overlay"></div>
+    <div class="dodo-dialog-wrapper">
+      <div class="dodo-dialog">
+        <header>
+          标题
+          <span @click="close" class="dodo-dialog-close"></span>
+        </header>
+        <main>
+          <p>第一行</p>
+          <p>第二行</p>
+        </main>
+        <footer>
+          <Button @click="submitOk" level="main">OK</Button>
+          <Button @click="submitCancel">Cancel</Button>
+        </footer>
+      </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -20,6 +25,43 @@ import Button from "./Button.vue";
 export default {
   components: {
     Button,
+  },
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true,
+    },
+    ok: {
+      type: Function,
+    },
+    cancel: {
+      type: Function,
+    },
+  },
+  setup(props, context) {
+    const close = () => {
+      context.emit("update:visible", !props);
+    };
+    const onClickOverlay = () => {
+      if (props.closeOnClickOverlay) {
+        close();
+      }
+    };
+    const submitOk = () => {
+      if (props.ok?.() !== false) {
+        close();
+      }
+    };
+    const submitCancel = () => {
+      if (props.cancel?.()) {
+        close();
+      }
+    };
+    return { close, onClickOverlay, submitCancel, submitOk };
   },
 };
 </script>
