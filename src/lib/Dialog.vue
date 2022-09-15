@@ -1,21 +1,23 @@
 <template>
   <template v-if="visible">
-    <div @click="onClickOverlay" class="dodo-dialog-overlay"></div>
-    <div class="dodo-dialog-wrapper">
-      <div class="dodo-dialog">
-        <header>
-          <slot name="title" />
-          <span @click="close" class="dodo-dialog-close"></span>
-        </header>
-        <main>
-          <slot name="content" />
-        </main>
-        <footer>
-          <Button @click="submitOk" level="main">OK</Button>
-          <Button @click="submitCancel">Cancel</Button>
-        </footer>
+    <Teleport to="body">
+      <div @click="onClickOverlay" class="dodo-dialog-overlay"></div>
+      <div class="dodo-dialog-wrapper">
+        <div class="dodo-dialog">
+          <header>
+            <slot name="title" />
+            <span @click="close" class="dodo-dialog-close"></span>
+          </header>
+          <main>
+            <slot name="content" />
+          </main>
+          <footer>
+            <Button @click="submitOk" level="main">OK</Button>
+            <Button @click="submitCancel">Cancel</Button>
+          </footer>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </template>
 </template>
 
@@ -60,7 +62,7 @@ export default {
       }
     };
     const submitCancel = () => {
-      context.emit("cancel");
+      props.cancel?.();
       close();
     };
     return { close, onClickOverlay, submitCancel, submitOk };
