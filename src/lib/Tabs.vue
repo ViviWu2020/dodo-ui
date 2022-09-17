@@ -1,16 +1,21 @@
 <template>
   <div class="dodo-tabs">
-    <div class="dodo-tabs-nav">
+    <div class="dodo-tabs-nav" ref="container">
       <div
         class="dodo-tabs-nav-item"
         :class="{ selected: t === selected }"
         v-for="(t, index) in titles"
         :key="index"
         @click="select(t)"
+        :ref="
+          (el) => {
+            if (el) navItems[index] = el;
+          }
+        "
       >
         {{ t }}
       </div>
-      <div class="dodo-tabs-nav-indicator"></div>
+      <div class="dodo-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="dodo-tabs-content">
       <component
@@ -25,13 +30,29 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUpdated } from "vue";
 import Tab from "./Tab.vue";
 export default {
   props: {
     selected: String,
   },
   setup(props, context) {
+    const navItems = ref<HTMLDivElement[]>([]);
+    const indicator = ref<HTMLDivElement>(null);
+    const container = ref<HTMLDivElement>(null);
+    const x = () => {
+      const divs = navItems.value;
+      const result = divs.filter((div) =>
+        div.classList.contains("selected")
+      )[0];
+      const { width } = result.getBoundingClientRect();
+      indicator.value.style.width = width + "px";
+      const { left: left1 } = container.value.getBoundingClientRect();
+      const { left: left2 } = result.getBoundingClientRect();
+      indicator.value.style.left = left2 - left1 + "px";
+    };
+    onMounted(x);
+    onUpdated(x);
     const defaults = context.slots.default();
     defaults.forEach((tag) => {
       if (tag.type !== Tab) {
@@ -48,6 +69,9 @@ export default {
       defaults,
       titles,
       select,
+      navItems,
+      indicator,
+      container,
     };
   },
 };
@@ -80,6 +104,7 @@ $border-color: #d9d9d9;
       left: 0;
       bottom: -1px;
       width: 100px;
+      transition: all 250ms;
     }
   }
 
