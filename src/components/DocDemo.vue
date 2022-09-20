@@ -1,3 +1,3 @@
 <template>
-  <div>DocDemo 组件</div>
+  <div>Doc 默认界面</div>
 </template>

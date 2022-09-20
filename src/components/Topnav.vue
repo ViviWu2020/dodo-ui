@@ -1,26 +1,38 @@
 <template>
   <div class="topnav">
-    <div class="logo">LOGO</div>
+    <router-link to="/" class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-waves"></use>
+      </svg>
+    </router-link>
     <ul class="menu">
-      <li>菜单1</li>
-      <li>菜单2</li>
+      <li>
+        <router-link to="/doc">文档</router-link>
+      </li>
     </ul>
-    <div class="toggleAside" @click="toggleMenu">
-      <img src="src\assets\images\menu.png" />
-    </div>
+    <svg
+      v-if="toggleMenuButtonVisible"
+      class="toggleAside"
+      @click="updateMenuVisible"
+    >
+      <use xlink:href="#icon-menu"></use>
+    </svg>
   </div>
 </template>
 
 
 <script lang="ts">
-import { inject, Ref } from "vue";
+import { inject } from "vue";
 export default {
+  props: {
+    toggleMenuButtonVisible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
-    const menuVisible = inject<Ref<boolean>>("menuVisible");
-    const toggleMenu = (menuVisible) => {
-      menuVisible.value = !menuVisible.value;
-    };
-    return { toggleMenu };
+    const updateMenuVisible = inject("updateMenuVisible");
+    return { updateMenuVisible };
   },
 };
 </script>
@@ -29,7 +41,6 @@ export default {
 
 <style lang="scss" scoped>
 .topnav {
-  background: rgb(104, 204, 164);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,25 +53,31 @@ export default {
   > .logo {
     max-width: 6em;
     margin-right: auto;
+    > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
   > .menu {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
     > li {
+      color: rgb(182, 204, 226);
       margin: 0 1em;
+      &:hover {
+        color: #fff;
+      }
     }
   }
   .toggleAside {
+    height: 24px;
+    width: 24px;
     display: none;
     position: absolute;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    > img {
-      width: 24px;
-      height: 24px;
-    }
   }
   @media (max-width: 500px) {
     > .menu {

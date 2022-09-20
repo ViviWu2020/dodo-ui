@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Topnav class="nav" />
+    <Topnav toggleMenuButtonVisible class="nav" />
     <div class="content">
       <aside v-if="menuVisible">
         <h2>组件列表</h2>
@@ -32,7 +32,7 @@ import Topnav from "../components/Topnav.vue";
 export default {
   components: { Topnav },
   setup() {
-    const menuVisible = inject<Ref<boolean>>("menuVisible");
+    const menuVisible = inject<Ref<boolean>>("menuVisible")!;
     return { menuVisible };
   },
 };
@@ -63,10 +63,12 @@ export default {
   > main {
     flex-grow: 1;
     padding: 16px;
+    background: #fff;
   }
 }
 aside {
-  background: lightblue;
+  color: #fff;
+  background: #1f364d;
   width: 150px;
   padding: 16px;
   position: fixed;
