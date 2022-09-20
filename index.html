@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Vite App</title>
     <script src="//at.alicdn.com/t/c/font_3658132_b4lynwfsq6a.js"></script>
   </head>
@@ -11,4 +12,24 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #e3e3e3;
+      }
+      div {
+        border-color: #353535;
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: #fff;
+        color: #333333;
+      }
+      div {
+        border-color: #a1a1a1;
+      }
+    }
+  </style>
 </html>
