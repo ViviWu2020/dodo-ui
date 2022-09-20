@@ -53,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 .router-link-active {
   text-shadow: 0 0 10px palevioletred, 0 0 20px palevioletred,
-    0 0 30px palevioletred, 0 0 40px black;
+    0 0 30px palevioletred;
 }
 .layout {
   display: flex;
