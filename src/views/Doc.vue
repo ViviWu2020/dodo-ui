@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$aside-index: 10;
 .router-link-active {
   text-shadow: 0 0 10px palevioletred, 0 0 20px palevioletred,
     0 0 30px palevioletred;
@@ -91,6 +92,7 @@ aside {
   left: 0;
   padding-top: 70px;
   height: 100%;
+  z-index: $aside-index;
   > h2 {
     margin-bottom: 4px;
   }
