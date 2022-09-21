@@ -7,6 +7,7 @@
     </router-link>
     <ul class="menu">
       <li>
+        <router-link to="/">首页</router-link>
         <router-link to="/doc">文档</router-link>
       </li>
     </ul>
@@ -63,10 +64,13 @@ export default {
     white-space: nowrap;
     flex-wrap: nowrap;
     > li {
-      color: rgb(182, 204, 226);
+      color: rgb(31, 54, 77);
       margin: 0 1em;
-      &:hover {
-        color: #fff;
+      > a {
+        margin-left: 8px;
+        &:hover {
+          color: rgb(182, 204, 226);
+        }
       }
     }
   }
